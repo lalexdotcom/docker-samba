@@ -1,4 +1,4 @@
-FROM alpine
+FROM arm32v6/alpine
 
 # Install samba
 RUN apk --no-cache --no-progress upgrade && \
