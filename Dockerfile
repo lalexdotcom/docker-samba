@@ -4,8 +4,8 @@ MAINTAINER David Personette <dperson@gmail.com>
 # Install samba
 RUN apk --no-cache --no-progress upgrade && \
     apk --no-cache --no-progress add bash samba shadow tini tzdata && \
-    addgroup -S smb && \
-    adduser -S -D -H -h /tmp -s /sbin/nologin -G smb -g 'Samba User' smbuser &&\
+    addgroup -S -g 1000 smb && \
+    adduser -S -D -H -h /tmp -s /sbin/nologin -G smb -g 'Samba User' -u 1000 smbuser &&\
     file="/etc/samba/smb.conf" && \
     sed -i 's|^;* *\(log file = \).*|   \1/dev/stdout|' $file && \
     sed -i 's|^;* *\(load printers = \).*|   \1no|' $file && \
