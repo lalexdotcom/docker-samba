@@ -1,4 +1,4 @@
-FROM alpine
+FROM arm32v6/alpine
 MAINTAINER David Personette <dperson@gmail.com>
 
 # Install samba
