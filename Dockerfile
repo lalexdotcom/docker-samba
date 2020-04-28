@@ -1,10 +1,11 @@
-FROM arm32v6/alpine
+FROM alpine
+MAINTAINER David Personette <dperson@gmail.com>
 
 # Install samba
 RUN apk --no-cache --no-progress upgrade && \
     apk --no-cache --no-progress add bash samba shadow tini tzdata && \
-    addgroup -S smb -g 1000 && \
-    adduser -S -D -H -h /tmp -s /sbin/nologin -G smb -g 'Samba User' -u 1000 smbuser &&\
+    addgroup -S smb && \
+    adduser -S -D -H -h /tmp -s /sbin/nologin -G smb -g 'Samba User' smbuser &&\
     file="/etc/samba/smb.conf" && \
     sed -i 's|^;* *\(log file = \).*|   \1/dev/stdout|' $file && \
     sed -i 's|^;* *\(load printers = \).*|   \1no|' $file && \
