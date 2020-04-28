@@ -66,4 +66,8 @@ HEALTHCHECK --interval=60s --timeout=15s \
 VOLUME ["/etc", "/var/cache/samba", "/var/lib/samba", "/var/log/samba",\
             "/run/samba"]
 
+RUN whoami
+RUN ls -al /sbin
+RUN ls -al /usr/bin
+
 ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/samba.sh"]
