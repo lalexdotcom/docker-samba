@@ -4,8 +4,8 @@ MAINTAINER David Personette <dperson@gmail.com>
 # Install samba
 RUN apk --no-cache --no-progress upgrade && \
     apk --no-cache --no-progress add bash samba shadow tini tzdata && \
-    addgroup -S -g 1000 smb && \
-    adduser -S -D -H -h /tmp -s /sbin/nologin -G smb -g 'Samba User' -u 1000 smbuser &&\
+    addgroup -S smb && \
+    adduser -S -D -H -h /tmp -s /sbin/nologin -G smb -g 'Samba User' smbuser &&\
     addgroup root smb &&\
     file="/etc/samba/smb.conf" && \
     sed -i 's|^;* *\(log file = \).*|   \1/dev/stdout|' $file && \
@@ -24,8 +24,8 @@ RUN apk --no-cache --no-progress upgrade && \
     echo '   force create mode = 0664' >>$file && \
     echo '   directory mask = 0775' >>$file && \
     echo '   force directory mode = 0775' >>$file && \
-    echo '   force user = smbuser' >>$file && \
-    echo '   force group = smb' >>$file && \
+    # echo '   force user = smbuser' >>$file && \
+    # echo '   force group = smb' >>$file && \
     echo '   follow symlinks = yes' >>$file && \
     echo '   load printers = no' >>$file && \
     echo '   printing = bsd' >>$file && \
